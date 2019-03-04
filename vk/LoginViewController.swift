@@ -5,6 +5,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     
+    private let SignedInSegue = "SignedIn"
+    
     private let defaultLogin = "admin"
     private let defaultPassword = "password"
     
@@ -71,10 +73,29 @@ class LoginViewController: UIViewController {
         }
         
         if login == defaultLogin && password == defaultPassword {
-            print("Success")
+            performSegue(withIdentifier: SignedInSegue, sender: self)
         } else {
-            print("Fail")
+            showErrorMessage()
         }
     }
     
+    func showErrorMessage() {
+        let alert = UIAlertController(
+            title: "Login Error",
+            message: "Incorrect login or password",
+            preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(
+            title: "OK",
+            style: UIAlertAction.Style.cancel,
+            handler: nil)
+        alert.addAction(okButton)
+        present(alert, animated: true)
+    }
+    
+    //MARK: - Unwind
+    
+    @IBAction func logout(for unwindSegue: UIStoryboardSegue) {
+        loginInput.text?.removeAll()
+        passwordInput.text?.removeAll()
+    }
 }
