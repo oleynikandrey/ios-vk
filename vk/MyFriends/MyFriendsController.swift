@@ -41,7 +41,8 @@ extension MyFriendsController: UITableViewDataSource {
 
         let friend = friends[indexPath.row]
         cell.name.text = friend.name
-        cell.avatar.image = friend.avatar
+        let avatar = cell.avatar as? AvatarImageView
+        avatar?.image = friend.avatar
 
         return cell
     }
