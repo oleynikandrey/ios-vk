@@ -26,6 +26,4 @@ extension FriendInfoController: UICollectionViewDataSource {
         
         return cell
     }
-    
-    
 }

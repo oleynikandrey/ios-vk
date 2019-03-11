@@ -190,13 +190,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCi-En-CJl" userLabel="IndexList" customClass="IndexList" customModule="vk" customModuleProvider="target">
+                                <rect key="frame" x="345" y="64" width="30" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="WFz-X5-gjO"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SvU-QD-Wrt" firstAttribute="leading" secondItem="OuF-ea-TmO" secondAttribute="leading" id="1HJ-kp-jjA"/>
+                            <constraint firstItem="pCi-En-CJl" firstAttribute="bottom" secondItem="HEa-X2-Wap" secondAttribute="bottom" id="DOb-qO-mKb"/>
                             <constraint firstAttribute="bottom" secondItem="SvU-QD-Wrt" secondAttribute="bottom" id="MKm-uw-gSH"/>
                             <constraint firstItem="SvU-QD-Wrt" firstAttribute="top" secondItem="OuF-ea-TmO" secondAttribute="top" id="Y82-8h-am3"/>
                             <constraint firstAttribute="trailing" secondItem="SvU-QD-Wrt" secondAttribute="trailing" id="glT-kA-1h5"/>
+                            <constraint firstItem="pCi-En-CJl" firstAttribute="trailing" secondItem="HEa-X2-Wap" secondAttribute="trailing" id="iB3-8F-G5W"/>
+                            <constraint firstItem="pCi-En-CJl" firstAttribute="top" secondItem="HEa-X2-Wap" secondAttribute="top" id="jCH-W2-Xfa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HEa-X2-Wap"/>
                     </view>
@@ -209,6 +219,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="friendsTable" destination="SvU-QD-Wrt" id="5ML-Es-Va6"/>
+                        <outlet property="indexListView" destination="pCi-En-CJl" id="vx0-Hg-Ux1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ik9-XN-rqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -242,7 +253,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aS9-Ra-wSu" userLabel="avatar" customClass="AvatarImageView" customModule="vk" customModuleProvider="target">
-                                                    <rect key="frame" x="39" y="30" width="222" height="222"/>
+                                                    <rect key="frame" x="46" y="30" width="208" height="208"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="aS9-Ra-wSu" secondAttribute="height" multiplier="1:1" id="xDs-45-vc4"/>
                                                     </constraints>
@@ -251,11 +262,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8C-GJ-eQF" customClass="LikeControl" customModule="vk" customModuleProvider="target">
-                                                    <rect key="frame" x="38" y="262" width="60" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="L3R-Ll-uvu"/>
-                                                        <constraint firstAttribute="height" constant="30" id="m5J-tP-idr"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="38" y="248" width="88" height="44"/>
                                                 </view>
                                             </subviews>
                                         </view>

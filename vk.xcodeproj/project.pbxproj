@@ -23,6 +23,7 @@
 		26762DFD2235A7CA0026FFC7 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26762DFB2235A7CA0026FFC7 /* AvatarImageView.swift */; };
 		26762DFE2235A7CA0026FFC7 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26762DFC2235A7CA0026FFC7 /* LikeControl.swift */; };
 		269E2C142235B0F90009675A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 269E2C132235B0F90009675A /* Assets.xcassets */; };
+		269E2C162236EBAE0009675A /* IndexList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E2C152236EBAE0009675A /* IndexList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		26762DFB2235A7CA0026FFC7 /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		26762DFC2235A7CA0026FFC7 /* LikeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		269E2C132235B0F90009675A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		269E2C152236EBAE0009675A /* IndexList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			children = (
 				26762DFB2235A7CA0026FFC7 /* AvatarImageView.swift */,
 				26762DFC2235A7CA0026FFC7 /* LikeControl.swift */,
+				269E2C152236EBAE0009675A /* IndexList.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				2665994A222874AB005A364C /* LoginViewController.swift in Sources */,
 				2667B5382232D7DB0024D8F3 /* MyFriendsController.swift in Sources */,
 				2667B549223300E60024D8F3 /* AllGroupsCell.swift in Sources */,
+				269E2C162236EBAE0009675A /* IndexList.swift in Sources */,
 				26659938222873FB005A364C /* AppDelegate.swift in Sources */,
 				2667B54B223308090024D8F3 /* MyGroupsCell.swift in Sources */,
 				2667B53A2232E4840024D8F3 /* Models.swift in Sources */,
