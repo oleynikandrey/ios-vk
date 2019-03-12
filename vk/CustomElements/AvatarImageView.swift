@@ -3,6 +3,13 @@ import UIKit
 
 class AvatarImageView: UIImageView {
     
+    override var image: UIImage? {
+        didSet {
+            super.image = image
+            setupView()
+        }
+    }
+    
     @IBInspectable var showShadow: Bool = true {
         didSet {
             setNeedsDisplay()
@@ -40,6 +47,7 @@ class AvatarImageView: UIImageView {
     }
     
     func setupView() {
+        moveContentToAnotherLayerAndMakeItRound()
         if showShadow {
             addShadow()
         }
@@ -56,7 +64,6 @@ class AvatarImageView: UIImageView {
        }
     
     override func layoutSublayers(of layer: CALayer) {
-        moveContentToAnotherLayerAndMakeItRound()
         setupView()
        }
 }

@@ -88,6 +88,7 @@ extension MyFriendsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
+        cell.avatar.image = nil
         
         let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
         let sectionFriends = friendsGrouped[sectionTitle]
@@ -96,7 +97,7 @@ extension MyFriendsController: UITableViewDataSource {
         cell.name.text = friend.name
         let avatar = cell.avatar as? AvatarImageView
         avatar?.image = friend.avatar
-
+        
         return cell
     }
 }
