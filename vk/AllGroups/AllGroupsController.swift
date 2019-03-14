@@ -5,7 +5,8 @@ class AllGroupsController: UIViewController {
     @IBOutlet weak var allGroups: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var myGroupsVC: MyGroupsController?
+    var addGroup: ((Group) -> Void)?
+    var isGroupAdded: ((Group) -> Bool)?
     
     private var initGroups = [Group] ()
     var groups = [Group] ()
@@ -52,20 +53,18 @@ extension AllGroupsController: UITableViewDataSource {
         cell.groupImage.image = group.image
         
         // Disable add button if group has been added earlear
-        if let myGroupsVC = myGroupsVC {
-            if myGroupsVC.groups.contains(group) {
+        if let isGroupAdded = isGroupAdded {
+            if isGroupAdded(group) {
                 cell.disableAddButton()
             }
         }
         
         cell.addGroupTapped = { groupName, groupImage in
             let group = Group(name: groupName, image: groupImage)
-            guard let myGroupsVC = self.myGroupsVC else {
+            guard let addGroup = self.addGroup else {
                 return
             }
-            if !myGroupsVC.groups.contains(group) {
-                myGroupsVC.groups.append(group)
-            }
+            addGroup(group)
         }
         
         return cell

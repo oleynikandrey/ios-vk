@@ -33,7 +33,14 @@ class MyGroupsController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AllGroupsController {
-            vc.myGroupsVC = self
+            vc.isGroupAdded = { group in
+                return self.groups.contains(group)
+            }
+            vc.addGroup = { group in
+                if !self.groups.contains(group) {
+                    self.groups.append(group)
+                }
+            }
         }
     }
 
