@@ -21,10 +21,9 @@ extension FriendInfoController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = friendInfo.dequeueReusableCell(withReuseIdentifier: "FriendInfoCell", for: indexPath) as! FriendInfoCell
         
-        cell.avatar.image = friend?.avatar
+        let avatar = cell.avatar as? AvatarImageView
+        avatar?.image = friend?.avatar
         
         return cell
     }
-    
-    
 }
