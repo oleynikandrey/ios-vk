@@ -100,6 +100,8 @@ extension MyFriendsController: UITableViewDataSource {
         
         return cell
     }
+    
+    
 }
 
 extension MyFriendsController: TableSectionSelecter {

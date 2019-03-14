@@ -11,6 +11,11 @@ class MyGroupsController: UIViewController {
         myGroups.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        myGroups.reloadData()
+    }
+    
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         if segue.identifier == "addGroup" {
             let allGroupsController = segue.source as! AllGroupsController
@@ -23,6 +28,12 @@ class MyGroupsController: UIViewController {
                     myGroups.reloadData()
                 }
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? AllGroupsController {
+            vc.myGroupsVC = self
         }
     }
 
