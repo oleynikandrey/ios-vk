@@ -2,8 +2,7 @@ import UIKit
 
 class MyFriendsController: UIViewController {
     
-    @IBOutlet weak var indexListView: IndexList!
-    @IBOutlet weak var friendsTable: UITableView!
+    @IBOutlet weak var friendsTableView: UITableView!
     
     var friends = [User] ()
     private var friendsGrouped: [String: [User]] = [:]
@@ -11,8 +10,8 @@ class MyFriendsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        friendsTable.dataSource = self
-        indexListView.delegate = self
+        friendsTableView.dataSource = self
+        friendsTableView.delegate = self
         
         friends = [
             User(name: "Rachell Lenton", avatar: UIImage(named: "1")),
@@ -48,16 +47,18 @@ class MyFriendsController: UIViewController {
                 friendsGrouped[letter]?.append(friend)
             }
         }
-
-        //MARK: - Index list
         
-        indexListView.letters = friendsGrouped.keys.sorted()
-        indexListView.setupView()
+        //MARK: - Look and feel
+        friendsTableView.backgroundColor = nil
+
+        //MARK: - Section headers
+        //we don't need custom UITableViewHeaderFooterView class here.
+        friendsTableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "MyFriendsSectionHeader")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFriendInfo" {
-            if let indexPath = friendsTable.indexPathForSelectedRow {
+            if let indexPath = friendsTableView.indexPathForSelectedRow {
                 let key = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
                 let friend = friendsGrouped[key]?[indexPath.row]
                 let controller = segue.destination as! FriendInfoController
@@ -101,14 +102,23 @@ extension MyFriendsController: UITableViewDataSource {
         return cell
     }
     
-    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return friendsGrouped.keys.sorted()
+    }
 }
 
-extension MyFriendsController: TableSectionSelecter {
-    func selectedSection(sectionLetter: String) {
-        let sectionIndex = friendsGrouped.keys.sorted().firstIndex(of: sectionLetter)
-        let indexPath = IndexPath(row: 0, section: sectionIndex!)
-        friendsTable.scrollToRow(at: indexPath, at: .top, animated: true)
+extension MyFriendsController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MyFriendsSectionHeader")
+
+        header?.backgroundView = UIView()
+        header?.backgroundView?.backgroundColor = tableView.backgroundColor?.withAlphaComponent(0.5)
+
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
     }
 }
 

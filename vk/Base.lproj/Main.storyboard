@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Thj-F9-FTv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -190,23 +190,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCi-En-CJl" userLabel="IndexList" customClass="IndexList" customModule="vk" customModuleProvider="target">
-                                <rect key="frame" x="345" y="64" width="30" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="WFz-X5-gjO"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SvU-QD-Wrt" firstAttribute="leading" secondItem="OuF-ea-TmO" secondAttribute="leading" id="1HJ-kp-jjA"/>
-                            <constraint firstItem="pCi-En-CJl" firstAttribute="bottom" secondItem="HEa-X2-Wap" secondAttribute="bottom" id="DOb-qO-mKb"/>
                             <constraint firstAttribute="bottom" secondItem="SvU-QD-Wrt" secondAttribute="bottom" id="MKm-uw-gSH"/>
                             <constraint firstItem="SvU-QD-Wrt" firstAttribute="top" secondItem="OuF-ea-TmO" secondAttribute="top" id="Y82-8h-am3"/>
                             <constraint firstAttribute="trailing" secondItem="SvU-QD-Wrt" secondAttribute="trailing" id="glT-kA-1h5"/>
-                            <constraint firstItem="pCi-En-CJl" firstAttribute="trailing" secondItem="HEa-X2-Wap" secondAttribute="trailing" id="iB3-8F-G5W"/>
-                            <constraint firstItem="pCi-En-CJl" firstAttribute="top" secondItem="HEa-X2-Wap" secondAttribute="top" id="jCH-W2-Xfa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HEa-X2-Wap"/>
                     </view>
@@ -218,8 +208,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="friendsTable" destination="SvU-QD-Wrt" id="5ML-Es-Va6"/>
-                        <outlet property="indexListView" destination="pCi-En-CJl" id="vx0-Hg-Ux1"/>
+                        <outlet property="friendsTableView" destination="SvU-QD-Wrt" id="bmn-ob-X7k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ik9-XN-rqb" userLabel="First Responder" sceneMemberID="firstResponder"/>

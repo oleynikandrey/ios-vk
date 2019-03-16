@@ -15,7 +15,7 @@ class AvatarImageView: UIImageView {
             setNeedsDisplay()
         }
     }
-    @IBInspectable var shadowRadius: CGFloat = 8 {
+    @IBInspectable var shadowRadius: CGFloat = 6 {
         didSet {
             setNeedsDisplay()
         }
