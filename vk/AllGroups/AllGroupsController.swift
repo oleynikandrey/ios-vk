@@ -18,11 +18,11 @@ class AllGroupsController: UIViewController {
         searchBar.delegate = self
         
         initGroups = [
-            Group(name: "Group 1", image: UIImage(named: "g1")),
-            Group(name: "Group 2", image: UIImage(named: "g2")),
-            Group(name: "Group 3", image: UIImage(named: "g3")),
-            Group(name: "Group 4", image: UIImage(named: "g4")),
-            Group(name: "Group 5", image: UIImage(named: "g5"))
+            Group(name: "Developing Microservices", image: UIImage(named: "g1")),
+            Group(name: "iOS Jailbreak/Tweaks", image: UIImage(named: "g2")),
+            Group(name: "Web Design and Development", image: UIImage(named: "g3")),
+            Group(name: "Javascript", image: UIImage(named: "g4")),
+            Group(name: "Game Development", image: UIImage(named: "g5"))
         ]
         
         filterContentForSearchText(nil)
