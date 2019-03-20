@@ -252,7 +252,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aS9-Ra-wSu" userLabel="avatar" customClass="AvatarImageView" customModule="vk" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aS9-Ra-wSu" userLabel="avatar" customClass="AvatarImageView" customModule="vk" customModuleProvider="target">
                                                     <rect key="frame" x="46" y="30" width="208" height="208"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="aS9-Ra-wSu" secondAttribute="height" multiplier="1:1" id="xDs-45-vc4"/>
@@ -261,7 +261,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8C-GJ-eQF" customClass="LikeControl" customModule="vk" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8C-GJ-eQF" customClass="LikeControl" customModule="vk" customModuleProvider="target">
                                                     <rect key="frame" x="38" y="248" width="88" height="44"/>
                                                 </view>
                                             </subviews>
@@ -439,23 +439,33 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnf-0p-GtI" userLabel="name">
-                                                    <rect key="frame" x="78.5" y="11" width="261.5" height="22"/>
+                                                    <rect key="frame" x="78.5" y="11" width="258.5" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3Z-QV-vdV">
+                                                    <rect key="frame" x="323" y="10" width="22" height="23.5"/>
+                                                    <connections>
+                                                        <action selector="addGroup:" destination="YmO-5c-GJA" eventType="touchUpInside" id="88Z-pj-Kz3"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ShF-xQ-eEf" firstAttribute="leading" secondItem="wJ1-rG-Y3c" secondAttribute="leading" constant="15" id="4rn-z9-1pf"/>
+                                                <constraint firstAttribute="trailing" secondItem="l3Z-QV-vdV" secondAttribute="trailing" constant="30" id="7Nu-AA-old"/>
+                                                <constraint firstItem="l3Z-QV-vdV" firstAttribute="top" secondItem="wJ1-rG-Y3c" secondAttribute="top" constant="10" id="DAu-dA-i61"/>
                                                 <constraint firstItem="hnf-0p-GtI" firstAttribute="top" secondItem="wJ1-rG-Y3c" secondAttribute="topMargin" id="ENd-wR-m8s"/>
+                                                <constraint firstAttribute="bottom" secondItem="l3Z-QV-vdV" secondAttribute="bottom" constant="10" id="OKJ-4C-zbR"/>
                                                 <constraint firstItem="hnf-0p-GtI" firstAttribute="leading" secondItem="ShF-xQ-eEf" secondAttribute="trailing" constant="20" id="RgG-wD-e2c"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="hnf-0p-GtI" secondAttribute="bottom" id="bwc-TH-qzU"/>
                                                 <constraint firstItem="ShF-xQ-eEf" firstAttribute="top" secondItem="wJ1-rG-Y3c" secondAttribute="top" id="hi0-zl-EWk"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="hnf-0p-GtI" secondAttribute="trailing" constant="20" id="qDD-xi-O6W"/>
+                                                <constraint firstItem="l3Z-QV-vdV" firstAttribute="trailingMargin" secondItem="hnf-0p-GtI" secondAttribute="trailing" id="qDD-xi-O6W"/>
                                                 <constraint firstAttribute="bottom" secondItem="ShF-xQ-eEf" secondAttribute="bottom" id="vzc-HL-tpC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addButton" destination="l3Z-QV-vdV" id="PVe-fc-tFY"/>
                                             <outlet property="groupImage" destination="ShF-xQ-eEf" id="Avi-1b-RwF"/>
                                             <outlet property="groupName" destination="hnf-0p-GtI" id="rBk-Ob-KNc"/>
                                             <segue destination="FZN-lN-T7c" kind="unwind" identifier="addGroup" unwindAction="addGroupWithSegue:" id="X1p-lf-nlI"/>
@@ -481,7 +491,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VS3-vo-V5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FZN-lN-T7c" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3775" y="366"/>
+            <point key="canvasLocation" x="3753" y="365"/>
         </scene>
         <!--Groups-->
         <scene sceneID="hzf-nt-7vP">

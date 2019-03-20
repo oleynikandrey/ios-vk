@@ -1,12 +1,12 @@
 import Foundation
 import UIKit
 
-struct User {
+struct User: Equatable {
     let name: String
     let avatar: UIImage?
 }
 
-struct Group {
+struct Group: Equatable {
     let name: String
     let image: UIImage?
 }

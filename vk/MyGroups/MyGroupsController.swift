@@ -11,6 +11,11 @@ class MyGroupsController: UIViewController {
         myGroups.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        myGroups.reloadData()
+    }
+    
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         if segue.identifier == "addGroup" {
             let allGroupsController = segue.source as! AllGroupsController
@@ -21,6 +26,19 @@ class MyGroupsController: UIViewController {
                 if !groups.contains {$0.name == group.name} {
                     groups.append(group)
                     myGroups.reloadData()
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? AllGroupsController {
+            vc.isGroupAdded = { group in
+                return self.groups.contains(group)
+            }
+            vc.addGroup = { group in
+                if !self.groups.contains(group) {
+                    self.groups.append(group)
                 }
             }
         }
