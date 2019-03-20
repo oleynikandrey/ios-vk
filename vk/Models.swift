@@ -10,3 +10,9 @@ struct Group: Equatable {
     let name: String
     let image: UIImage?
 }
+
+struct News: Equatable {
+    let text: String
+    let image: UIImage?
+    let views: Int
+}

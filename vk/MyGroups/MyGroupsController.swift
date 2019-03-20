@@ -1,19 +1,24 @@
 import UIKit
 
 class MyGroupsController: UIViewController {
-    @IBOutlet weak var myGroups: UITableView!
+    @IBOutlet weak var myGroupsTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
+    
+    private var filteredGroups = [Group] ()
     var groups = [Group] ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        myGroups.dataSource = self
+        myGroupsTableView.dataSource = self
+        searchBar.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        myGroups.reloadData()
+        filterContentForSearchText(nil)
+        myGroupsTableView.reloadData()
     }
     
     @IBAction func addGroup(segue: UIStoryboardSegue) {
@@ -25,7 +30,7 @@ class MyGroupsController: UIViewController {
                 
                 if !groups.contains {$0.name == group.name} {
                     groups.append(group)
-                    myGroups.reloadData()
+                    myGroupsTableView.reloadData()
                 }
             }
         }
@@ -43,18 +48,29 @@ class MyGroupsController: UIViewController {
             }
         }
     }
+    
+    func filterContentForSearchText(_ searchText: String?, scope: String = "All") {
+        
+        if searchText?.isEmpty ?? true {
+            filteredGroups = groups
+        } else {
+            filteredGroups = groups.filter {$0.name.lowercased().contains(searchText!.lowercased())}
+        }
+        
+        myGroupsTableView.reloadData()
+    }
 
 }
 
 extension MyGroupsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groups.count
+        return filteredGroups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupsCell", for: indexPath) as! MyGroupsCell
         
-        let group = self.groups[indexPath.row]
+        let group = self.filteredGroups[indexPath.row]
         cell.groupName.text = group.name
         cell.groupImage.image = group.image
         
@@ -63,8 +79,16 @@ extension MyGroupsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            groups.remove(at: indexPath.row)
-            myGroups.deleteRows(at: [indexPath], with: .fade)
+            let groupToRemove = filteredGroups[indexPath.row]
+            filteredGroups.remove(at: indexPath.row)
+            groups = groups.filter {$0 != groupToRemove}
+            myGroupsTableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+}
+
+extension MyGroupsController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearchText(searchText)
     }
 }

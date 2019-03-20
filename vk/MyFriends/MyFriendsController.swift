@@ -2,19 +2,21 @@ import UIKit
 
 class MyFriendsController: UIViewController {
     
-    @IBOutlet weak var indexListView: IndexList!
-    @IBOutlet weak var friendsTable: UITableView!
+    @IBOutlet weak var friendsTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var friends = [User] ()
+    private var initFriends = [User] ()
     private var friendsGrouped: [String: [User]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        friendsTable.dataSource = self
-        indexListView.delegate = self
+        friendsTableView.dataSource = self
+        friendsTableView.delegate = self
+        searchBar.delegate = self
         
-        friends = [
+        initFriends = [
             User(name: "Rachell Lenton", avatar: UIImage(named: "1")),
             User(name: "Karolyn Higginbotham", avatar: UIImage(named: "2")),
             User(name: "Arie Vadnais", avatar: UIImage(named: "3")),
@@ -36,6 +38,27 @@ class MyFriendsController: UIViewController {
             User(name: "Oda Spalding", avatar: UIImage(named: "19"))
         ].sorted(by: {$0.name < $1.name})
         
+        //MARK: - Look and feel
+        friendsTableView.backgroundColor = nil
+
+        //MARK: - Section headers
+        //we don't need custom UITableViewHeaderFooterView class here.
+        friendsTableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "MyFriendsSectionHeader")
+        
+        //MARK: - Search
+        filterContentForSearchText(nil)
+    }
+    
+    func filterContentForSearchText(_ searchText: String?, scope: String = "All") {
+        
+        if searchText?.isEmpty ?? true {
+            friends = initFriends
+        } else {
+            friends = initFriends.filter {$0.name.lowercased().contains(searchText!.lowercased())}
+        }
+        
+        friendsGrouped = [:]
+        
         for friend in friends {
             guard let char = friend.name.first else {
                 continue
@@ -48,16 +71,13 @@ class MyFriendsController: UIViewController {
                 friendsGrouped[letter]?.append(friend)
             }
         }
-
-        //MARK: - Index list
         
-        indexListView.letters = friendsGrouped.keys.sorted()
-        indexListView.setupView()
+        friendsTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFriendInfo" {
-            if let indexPath = friendsTable.indexPathForSelectedRow {
+            if let indexPath = friendsTableView.indexPathForSelectedRow {
                 let key = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
                 let friend = friendsGrouped[key]?[indexPath.row]
                 let controller = segue.destination as! FriendInfoController
@@ -101,14 +121,28 @@ extension MyFriendsController: UITableViewDataSource {
         return cell
     }
     
-    
-}
-
-extension MyFriendsController: TableSectionSelecter {
-    func selectedSection(sectionLetter: String) {
-        let sectionIndex = friendsGrouped.keys.sorted().firstIndex(of: sectionLetter)
-        let indexPath = IndexPath(row: 0, section: sectionIndex!)
-        friendsTable.scrollToRow(at: indexPath, at: .top, animated: true)
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return friendsGrouped.keys.sorted()
     }
 }
 
+extension MyFriendsController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MyFriendsSectionHeader")
+
+        header?.backgroundView = UIView()
+        header?.backgroundView?.backgroundColor = tableView.backgroundColor?.withAlphaComponent(0.5)
+
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
+    }
+}
+
+extension MyFriendsController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearchText(searchText)
+    }
+}
