@@ -63,7 +63,10 @@ import UIKit
     
     private func updateCounter() {
         let label = elements[1] as! UILabel
-        label.text = "\(likes)"
+        UIView.transition(with: label, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+            label.text = "\(self.likes)"
+        })
+        
     }
     
     // MARK: Button Action
