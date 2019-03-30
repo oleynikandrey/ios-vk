@@ -397,13 +397,14 @@
                     <navigationItem key="navigationItem" id="5wM-Lr-Wak">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xBK-o4-c7R">
                             <connections>
-                                <segue destination="y8E-I6-Vpm" kind="show" id="fDx-zl-lHt"/>
+                                <action selector="showAllGroups:" destination="8u0-8x-njy" id="dmY-o5-Ov4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="myGroupsTableView" destination="7fa-7d-Kg2" id="oE4-kA-L6u"/>
                         <outlet property="searchBar" destination="D3u-XF-fhO" id="5p2-Au-RGe"/>
+                        <segue destination="y8E-I6-Vpm" kind="custom" identifier="showAllGroups" customClass="ShowAllGroupsSegue" customModule="vk" customModuleProvider="target" id="ovC-nJ-hOn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Amu-Su-YDx" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -29,6 +29,7 @@
 		26762DFE2235A7CA0026FFC7 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26762DFC2235A7CA0026FFC7 /* LikeControl.swift */; };
 		269E2C142235B0F90009675A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 269E2C132235B0F90009675A /* Assets.xcassets */; };
 		269E2C162236EBAE0009675A /* IndexList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E2C152236EBAE0009675A /* IndexList.swift */; };
+		26EAFE63224E00CD009410ED /* ShowAllGroupsSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EAFE62224E00CD009410ED /* ShowAllGroupsSegue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		26762DFC2235A7CA0026FFC7 /* LikeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		269E2C132235B0F90009675A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		269E2C152236EBAE0009675A /* IndexList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexList.swift; sourceTree = "<group>"; };
+		26EAFE62224E00CD009410ED /* ShowAllGroupsSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllGroupsSegue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				2667B5432232FE8E0024D8F3 /* MyGroupsController.swift */,
 				2667B54A223308090024D8F3 /* MyGroupsCell.swift */,
+				26EAFE62224E00CD009410ED /* ShowAllGroupsSegue.swift */,
 			);
 			path = MyGroups;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2667B53C2232E5D60024D8F3 /* MyFriendsCell.swift in Sources */,
+				26EAFE63224E00CD009410ED /* ShowAllGroupsSegue.swift in Sources */,
 				2665994A222874AB005A364C /* LoginViewController.swift in Sources */,
 				2667B5382232D7DB0024D8F3 /* MyFriendsController.swift in Sources */,
 				26694CE8223E7F7000EDD7D9 /* NewsController.swift in Sources */,
