@@ -3,7 +3,7 @@ import UIKit
 
 struct User: Equatable {
     let name: String
-    let avatar: UIImage?
+    let avatars: [UIImage?]
 }
 
 struct Group: Equatable {

@@ -5,6 +5,7 @@ class FriendInfoController: UIViewController {
     @IBOutlet weak var friendInfo: UICollectionView!
     
     var friend: User?
+    var imageIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +35,10 @@ extension FriendInfoController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = friendInfo.dequeueReusableCell(withReuseIdentifier: "FriendInfoCell", for: indexPath) as! FriendInfoCell
         
+        cell.delegate = self
+        
         let avatar = cell.avatar as? AvatarImageView
-        avatar?.image = friend?.avatar
+        avatar?.image = friend?.avatars[0]
         
         return cell
     }
@@ -47,5 +50,23 @@ extension FriendInfoController: UICollectionViewDelegate {
             return
         }
         animateFriendInfoCellImage(cell: cell)
+    }
+}
+
+extension FriendInfoController: FriendImageSelector {
+    func getFriendImagesCount() -> Int {
+        return friend?.avatars.count ?? 0
+    }
+    
+    func getFriendCurrentImageIndex() -> Int {
+        return imageIndex
+    }
+    
+    func updateFriendCurrentImageIndex(id: Int) {
+        imageIndex = id
+    }
+    
+    func getFriendImage(id: Int) -> UIImage?{
+        return friend?.avatars[id]
     }
 }

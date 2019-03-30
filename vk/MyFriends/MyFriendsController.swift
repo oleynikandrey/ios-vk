@@ -17,25 +17,25 @@ class MyFriendsController: UIViewController {
         searchBar.delegate = self
         
         initFriends = [
-            User(name: "Rachell Lenton", avatar: UIImage(named: "1")),
-            User(name: "Karolyn Higginbotham", avatar: UIImage(named: "2")),
-            User(name: "Arie Vadnais", avatar: UIImage(named: "3")),
-            User(name: "Toshia Fong", avatar: UIImage(named: "4")),
-            User(name: "Yuriko Dellinger", avatar: UIImage(named: "5")),
-            User(name: "Verlie Devereux", avatar: UIImage(named: "6")),
-            User(name: "Alene Oconnor", avatar: UIImage(named: "7")),
-            User(name: "Enriqueta Carlsen", avatar: UIImage(named: "8")),
-            User(name: "Franklin Harms", avatar: UIImage(named: "9")),
-            User(name: "Eldridge Ferrell", avatar: UIImage(named: "10")),
-            User(name: "Kandi Thorman", avatar: UIImage(named: "11")),
-            User(name: "Sabrina Rushin", avatar: UIImage(named: "12")),
-            User(name: "Julia Duplantis", avatar: UIImage(named: "13")),
-            User(name: "Max Kinnaird", avatar: UIImage(named: "14")),
-            User(name: "Ayesha Helton", avatar: UIImage(named: "15")),
-            User(name: "Burt Chumbley", avatar: UIImage(named: "16")),
-            User(name: "Mitchel Marten", avatar: UIImage(named: "17")),
-            User(name: "Angeles Lueras", avatar: UIImage(named: "18")),
-            User(name: "Oda Spalding", avatar: UIImage(named: "19"))
+            User(name: "Rachell Lenton", avatars: [UIImage(named: "1"), UIImage(named: "1-1")]),
+            User(name: "Karolyn Higginbotham", avatars: [UIImage(named: "2"), UIImage(named: "2-2")]),
+            User(name: "Arie Vadnais", avatars: [UIImage(named: "3"), UIImage(named: "3-3")]),
+            User(name: "Toshia Fong", avatars: [UIImage(named: "4"), UIImage(named: "4-4")]),
+            User(name: "Yuriko Dellinger", avatars: [UIImage(named: "5"), UIImage(named: "5-5")]),
+            User(name: "Verlie Devereux", avatars: [UIImage(named: "6"), UIImage(named: "6-6")]),
+            User(name: "Alene Oconnor", avatars: [UIImage(named: "7"), UIImage(named: "7-7")]),
+            User(name: "Enriqueta Carlsen", avatars: [UIImage(named: "8"), UIImage(named: "8-8")]),
+            User(name: "Franklin Harms", avatars: [UIImage(named: "9"), UIImage(named: "9-9")]),
+            User(name: "Eldridge Ferrell", avatars: [UIImage(named: "10"), UIImage(named: "10-10")]),
+            User(name: "Kandi Thorman", avatars: [UIImage(named: "11"), UIImage(named: "11-11")]),
+            User(name: "Sabrina Rushin", avatars: [UIImage(named: "12"), UIImage(named: "12-12")]),
+            User(name: "Julia Duplantis", avatars: [UIImage(named: "13"), UIImage(named: "13-13")]),
+            User(name: "Max Kinnaird", avatars: [UIImage(named: "14"), UIImage(named: "14-14")]),
+            User(name: "Ayesha Helton", avatars: [UIImage(named: "15"), UIImage(named: "15-15")]),
+            User(name: "Burt Chumbley", avatars: [UIImage(named: "16"), UIImage(named: "16-16")]),
+            User(name: "Mitchel Marten", avatars: [UIImage(named: "17"), UIImage(named: "17-17")]),
+            User(name: "Angeles Lueras", avatars: [UIImage(named: "18"), UIImage(named: "18-18")]),
+            User(name: "Oda Spalding", avatars: [UIImage(named: "19"), UIImage(named: "19-19")])
         ].sorted(by: {$0.name < $1.name})
         
         //MARK: - Look and feel
@@ -116,7 +116,7 @@ extension MyFriendsController: UITableViewDataSource {
         let friend = sectionFriends![indexPath.row]
         cell.name.text = friend.name
         let avatar = cell.avatar as? AvatarImageView
-        avatar?.image = friend.avatar
+        avatar?.image = friend.avatars[0]
         
         return cell
     }
