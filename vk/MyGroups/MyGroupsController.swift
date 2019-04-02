@@ -21,10 +21,6 @@ class MyGroupsController: UIViewController {
         myGroupsTableView.reloadData()
     }
     
-    @IBAction func showAllGroups(_ sender: Any) {
-        performSegue(withIdentifier: "showAllGroups", sender: self)
-    }
-    
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         if segue.identifier == "addGroup" {
             let allGroupsController = segue.source as! AllGroupsController
