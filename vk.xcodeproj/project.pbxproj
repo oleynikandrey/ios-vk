@@ -31,6 +31,7 @@
 		269E2C162236EBAE0009675A /* IndexList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269E2C152236EBAE0009675A /* IndexList.swift */; };
 		26B3DB3F22533CD3003BDE43 /* CustomTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B3DB3E22533CD3003BDE43 /* CustomTransitionAnimation.swift */; };
 		26B3DB48225400F0003BDE43 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B3DB47225400F0003BDE43 /* CustomNavigationController.swift */; };
+		26FA4EC42272E5BC00253B30 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FA4EC32272E5BC00253B30 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		269E2C152236EBAE0009675A /* IndexList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexList.swift; sourceTree = "<group>"; };
 		26B3DB3E22533CD3003BDE43 /* CustomTransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimation.swift; sourceTree = "<group>"; };
 		26B3DB47225400F0003BDE43 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		26FA4EC32272E5BC00253B30 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				26659943222873FD005A364C /* Info.plist */,
 				26659949222874AB005A364C /* LoginViewController.swift */,
 				2667B5392232E4840024D8F3 /* Models.swift */,
+				26FA4EC32272E5BC00253B30 /* Helpers.swift */,
 			);
 			path = vk;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2667B53C2232E5D60024D8F3 /* MyFriendsCell.swift in Sources */,
+				26FA4EC42272E5BC00253B30 /* Helpers.swift in Sources */,
 				2665994A222874AB005A364C /* LoginViewController.swift in Sources */,
 				2667B5382232D7DB0024D8F3 /* MyFriendsController.swift in Sources */,
 				26694CE8223E7F7000EDD7D9 /* NewsController.swift in Sources */,
