@@ -32,6 +32,7 @@
 		26B3DB3F22533CD3003BDE43 /* CustomTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B3DB3E22533CD3003BDE43 /* CustomTransitionAnimation.swift */; };
 		26B3DB48225400F0003BDE43 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B3DB47225400F0003BDE43 /* CustomNavigationController.swift */; };
 		26FA4EC42272E5BC00253B30 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FA4EC32272E5BC00253B30 /* Helpers.swift */; };
+		26FA4EC6227828F200253B30 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26FA4EC5227828F200253B30 /* WebKit.framework */; };
 		B78C041A22C1E1C36785AC03 /* Pods_vk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E45A23A91D356EEE3411476 /* Pods_vk.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		26B3DB3E22533CD3003BDE43 /* CustomTransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimation.swift; sourceTree = "<group>"; };
 		26B3DB47225400F0003BDE43 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		26FA4EC32272E5BC00253B30 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		26FA4EC5227828F200253B30 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3E45A23A91D356EEE3411476 /* Pods_vk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9EA85BED4E3C63F061FD2E /* Pods-vk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk.debug.xcconfig"; path = "Target Support Files/Pods-vk/Pods-vk.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26FA4EC6227828F200253B30 /* WebKit.framework in Frameworks */,
 				B78C041A22C1E1C36785AC03 /* Pods_vk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +193,7 @@
 		75912A92DF9D1BE03B6E4DCC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26FA4EC5227828F200253B30 /* WebKit.framework */,
 				3E45A23A91D356EEE3411476 /* Pods_vk.framework */,
 			);
 			name = Frameworks;
@@ -201,7 +205,6 @@
 				EE9EA85BED4E3C63F061FD2E /* Pods-vk.debug.xcconfig */,
 				0F28AA61CD67D9F136E724F0 /* Pods-vk.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
