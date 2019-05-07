@@ -16,27 +16,16 @@ class MyFriendsController: UIViewController {
         friendsTableView.delegate = self
         searchBar.delegate = self
         
-        initFriends = [
-            User(name: "Rachell Lenton", avatars: [UIImage(named: "1"), UIImage(named: "1-1")]),
-            User(name: "Karolyn Higginbotham", avatars: [UIImage(named: "2"), UIImage(named: "2-2")]),
-            User(name: "Arie Vadnais", avatars: [UIImage(named: "3"), UIImage(named: "3-3")]),
-            User(name: "Toshia Fong", avatars: [UIImage(named: "4"), UIImage(named: "4-4")]),
-            User(name: "Yuriko Dellinger", avatars: [UIImage(named: "5"), UIImage(named: "5-5")]),
-            User(name: "Verlie Devereux", avatars: [UIImage(named: "6"), UIImage(named: "6-6")]),
-            User(name: "Alene Oconnor", avatars: [UIImage(named: "7"), UIImage(named: "7-7")]),
-            User(name: "Enriqueta Carlsen", avatars: [UIImage(named: "8"), UIImage(named: "8-8")]),
-            User(name: "Franklin Harms", avatars: [UIImage(named: "9"), UIImage(named: "9-9")]),
-            User(name: "Eldridge Ferrell", avatars: [UIImage(named: "10"), UIImage(named: "10-10")]),
-            User(name: "Kandi Thorman", avatars: [UIImage(named: "11"), UIImage(named: "11-11")]),
-            User(name: "Sabrina Rushin", avatars: [UIImage(named: "12"), UIImage(named: "12-12")]),
-            User(name: "Julia Duplantis", avatars: [UIImage(named: "13"), UIImage(named: "13-13")]),
-            User(name: "Max Kinnaird", avatars: [UIImage(named: "14"), UIImage(named: "14-14")]),
-            User(name: "Ayesha Helton", avatars: [UIImage(named: "15"), UIImage(named: "15-15")]),
-            User(name: "Burt Chumbley", avatars: [UIImage(named: "16"), UIImage(named: "16-16")]),
-            User(name: "Mitchel Marten", avatars: [UIImage(named: "17"), UIImage(named: "17-17")]),
-            User(name: "Angeles Lueras", avatars: [UIImage(named: "18"), UIImage(named: "18-18")]),
-            User(name: "Oda Spalding", avatars: [UIImage(named: "19"), UIImage(named: "19-19")])
-        ].sorted(by: {$0.name < $1.name})
+        guard let access_token = Session.sharedInstance.token else {
+            return
+        }
+        
+        let client = VKAPIClient(access_token: access_token)
+        client.get_friends() {friends in
+            self.initFriends = friends.sorted(by: {$0.first_name < $1.first_name})
+            
+            self.filterContentForSearchText(nil)
+        }
         
         //MARK: - Look and feel
         friendsTableView.backgroundColor = nil
@@ -54,13 +43,13 @@ class MyFriendsController: UIViewController {
         if searchText?.isEmpty ?? true {
             friends = initFriends
         } else {
-            friends = initFriends.filter {$0.name.lowercased().contains(searchText!.lowercased())}
+            friends = initFriends.filter {("\($0.first_name) \($0.last_name)").lowercased().contains(searchText!.lowercased())}
         }
         
         friendsGrouped = [:]
         
         for friend in friends {
-            guard let char = friend.name.first else {
+            guard let char = friend.last_name.first else {
                 continue
             }
             let letter = String.init(char)
@@ -108,15 +97,14 @@ extension MyFriendsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
-        cell.avatar.image = nil
         
         let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
         let sectionFriends = friendsGrouped[sectionTitle]
         
         let friend = sectionFriends![indexPath.row]
-        cell.name.text = friend.name
+        cell.name.text = "\(friend.first_name) \(friend.last_name)"
         let avatar = cell.avatar as? AvatarImageView
-        avatar?.image = friend.avatars[0]
+        avatar?.downloaded(from: friend.photo_uri)
         
         return cell
     }

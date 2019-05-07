@@ -38,7 +38,10 @@ extension FriendInfoController: UICollectionViewDataSource {
         cell.delegate = self
         
         let avatar = cell.avatar as? AvatarImageView
-        avatar?.image = friend?.avatars[0]
+        
+        if let photo_uri = friend?.photo_uri {
+            avatar?.downloaded(from: photo_uri)
+        }
         
         return cell
     }
@@ -55,7 +58,8 @@ extension FriendInfoController: UICollectionViewDelegate {
 
 extension FriendInfoController: FriendImageSelector {
     func getFriendImagesCount() -> Int {
-        return friend?.avatars.count ?? 0
+//        return friend?.avatars.count ?? 0
+        return 1
     }
     
     func getFriendCurrentImageIndex() -> Int {
@@ -67,6 +71,7 @@ extension FriendInfoController: FriendImageSelector {
     }
     
     func getFriendImage(id: Int) -> UIImage?{
-        return friend?.avatars[id]
+//        return friend?.avatars[id]
+        return #imageLiteral(resourceName: "news3")
     }
 }
