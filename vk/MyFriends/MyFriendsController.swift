@@ -21,7 +21,7 @@ class MyFriendsController: UIViewController {
         }
         
         let client = VKAPIClient(access_token: access_token)
-        client.get_friends() {friends in
+        client.getFriends() {friends in
             self.initFriends = friends.sorted(by: {$0.first_name < $1.first_name})
             
             self.filterContentForSearchText(nil)

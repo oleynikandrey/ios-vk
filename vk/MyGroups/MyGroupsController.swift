@@ -19,7 +19,7 @@ class MyGroupsController: UIViewController {
         }
         
         let client = VKAPIClient(access_token: access_token)
-        client.get_groups() {groups in
+        client.getGroups() {groups in
             self.groups = groups
             self.filterContentForSearchText(nil)
         }

@@ -34,7 +34,7 @@ class VKAPIClient{
         self.access_token = access_token
     }
     
-    func get_profile(completionHandler: @escaping (User) -> Void ) {
+    func getProfile(completionHandler: @escaping (User) -> Void ) {
         var components = urlComponents
         components.path += "users.get"
         components.queryItems?.append(URLQueryItem(name: "fields", value: "photo_100"))
@@ -64,7 +64,7 @@ class VKAPIClient{
         task.resume()
     }
     
-    func get_friends(completionHandler: @escaping ([User]) -> Void ) {
+    func getFriends(completionHandler: @escaping ([User]) -> Void ) {
         var components = urlComponents
         components.path += "friends.get"
         components.queryItems?.append(URLQueryItem(name: "fields", value: "nickname,photo_100"))
@@ -93,7 +93,7 @@ class VKAPIClient{
         task.resume()
     }
     
-    func get_photos(album_id: String = "profile", completionHandler: @escaping ([Photo]) -> Void ) {
+    func getPhotos(album_id: String = "profile", completionHandler: @escaping ([Photo]) -> Void ) {
         var components = urlComponents
         components.path += "photos.get"
         components.queryItems?.append(URLQueryItem(name: "album_id", value: album_id))
@@ -122,7 +122,7 @@ class VKAPIClient{
         task.resume()
     }
     
-    func get_groups(completionHandler: @escaping ([Group]) -> Void ) {
+    func getGroups(completionHandler: @escaping ([Group]) -> Void ) {
         var components = urlComponents
         components.path += "groups.get"
         components.queryItems?.append(URLQueryItem(name: "extended", value: "1"))
@@ -151,7 +151,7 @@ class VKAPIClient{
         task.resume()
     }
     
-    func find_groups(query: String, completionHandler: @escaping ([Group]) -> Void ) {
+    func findGroups(query: String, completionHandler: @escaping ([Group]) -> Void ) {
         var components = urlComponents
         components.path += "groups.search"
         components.queryItems?.append(URLQueryItem(name: "q", value: query))
