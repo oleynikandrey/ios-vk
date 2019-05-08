@@ -67,20 +67,8 @@ extension LoginViewController: WKNavigationDelegate {
         let session = Session.sharedInstance
         session.token = token
         
-        guard let access_token = session.token else {
-            return
-        }
-        
-        // MARK: - Just for tests
-        
-        let client = VKAPIClient(access_token: access_token)
-        
-        client.get_profile()
-        client.get_friends()
-        client.get_photos()
-        client.get_groups()
-        client.find_groups(query: "Universal Music Group")
-        
+        performSegue(withIdentifier: SignedInSegue, sender: self)
+                
         decisionHandler(.cancel)
     }
 }

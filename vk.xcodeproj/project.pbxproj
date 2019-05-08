@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		265DA59C2280F46400542489 /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DA59B2280F46400542489 /* VKService.swift */; };
 		26659938222873FB005A364C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26659937222873FB005A364C /* AppDelegate.swift */; };
 		2665993D222873FB005A364C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2665993B222873FB005A364C /* Main.storyboard */; };
 		26659942222873FD005A364C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26659940222873FD005A364C /* LaunchScreen.storyboard */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		0F28AA61CD67D9F136E724F0 /* Pods-vk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk.release.xcconfig"; path = "Target Support Files/Pods-vk/Pods-vk.release.xcconfig"; sourceTree = "<group>"; };
+		265DA59B2280F46400542489 /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		26659934222873FB005A364C /* vk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26659937222873FB005A364C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2665993C222873FB005A364C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				26659949222874AB005A364C /* LoginViewController.swift */,
 				2667B5392232E4840024D8F3 /* Models.swift */,
 				26FA4EC32272E5BC00253B30 /* Helpers.swift */,
+				265DA59B2280F46400542489 /* VKService.swift */,
 			);
 			path = vk;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				26FA4EC42272E5BC00253B30 /* Helpers.swift in Sources */,
 				2665994A222874AB005A364C /* LoginViewController.swift in Sources */,
 				2667B5382232D7DB0024D8F3 /* MyFriendsController.swift in Sources */,
+				265DA59C2280F46400542489 /* VKService.swift in Sources */,
 				26694CE8223E7F7000EDD7D9 /* NewsController.swift in Sources */,
 				2667B549223300E60024D8F3 /* AllGroupsCell.swift in Sources */,
 				26694CEB223E809800EDD7D9 /* NewsViewCell.swift in Sources */,

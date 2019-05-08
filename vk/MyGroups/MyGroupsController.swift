@@ -13,6 +13,16 @@ class MyGroupsController: UIViewController {
         
         myGroupsTableView.dataSource = self
         searchBar.delegate = self
+        
+        guard let access_token = Session.sharedInstance.token else {
+            return
+        }
+        
+        let client = VKAPIClient(access_token: access_token)
+        client.getGroups() {groups in
+            self.groups = groups
+            self.filterContentForSearchText(nil)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,16 +47,16 @@ class MyGroupsController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? AllGroupsController {
-            vc.isGroupAdded = { group in
-                return self.groups.contains(group)
-            }
-            vc.addGroup = { group in
-                if !self.groups.contains(group) {
-                    self.groups.append(group)
-                }
-            }
-        }
+//        if let vc = segue.destination as? AllGroupsController {
+//            vc.isGroupAdded = { group in
+//                return self.groups.contains(group)
+//            }
+//            vc.addGroup = { group in
+//                if !self.groups.contains(group) {
+//                    self.groups.append(group)
+//                }
+//            }
+//        }
     }
     
     func filterContentForSearchText(_ searchText: String?, scope: String = "All") {
@@ -72,7 +82,7 @@ extension MyGroupsController: UITableViewDataSource {
         
         let group = self.filteredGroups[indexPath.row]
         cell.groupName.text = group.name
-        cell.groupImage.image = group.image
+        cell.groupImage.downloaded(from: group.image_uri)
         
         return cell
     }
@@ -81,7 +91,7 @@ extension MyGroupsController: UITableViewDataSource {
         if editingStyle == .delete {
             let groupToRemove = filteredGroups[indexPath.row]
             filteredGroups.remove(at: indexPath.row)
-            groups = groups.filter {$0 != groupToRemove}
+//            groups = groups.filter {$0 != groupToRemove}
             myGroupsTableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
