@@ -1,4 +1,5 @@
 import UIKit
+import SwiftKeychainWrapper
 
 class MyFriendsController: UIViewController {
     
@@ -16,11 +17,11 @@ class MyFriendsController: UIViewController {
         friendsTableView.delegate = self
         searchBar.delegate = self
         
-        guard let access_token = Session.sharedInstance.token else {
+        guard let accessToken = KeychainWrapper.standard.string(forKey: ACCESS_TOKEN) else {
             return
         }
         
-        let client = VKAPIClient(access_token: access_token)
+        let client = VKAPIClient(access_token: accessToken)
         client.getFriends() {friends in
             self.initFriends = friends.sorted(by: {$0.first_name < $1.first_name})
             

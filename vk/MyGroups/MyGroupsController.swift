@@ -1,4 +1,5 @@
 import UIKit
+import SwiftKeychainWrapper
 
 class MyGroupsController: UIViewController {
     @IBOutlet weak var myGroupsTableView: UITableView!
@@ -14,11 +15,11 @@ class MyGroupsController: UIViewController {
         myGroupsTableView.dataSource = self
         searchBar.delegate = self
         
-        guard let access_token = Session.sharedInstance.token else {
+        guard let accessToken = KeychainWrapper.standard.string(forKey: ACCESS_TOKEN) else {
             return
         }
         
-        let client = VKAPIClient(access_token: access_token)
+        let client = VKAPIClient(access_token: accessToken)
         client.getGroups() {groups in
             self.groups = groups
             self.filterContentForSearchText(nil)

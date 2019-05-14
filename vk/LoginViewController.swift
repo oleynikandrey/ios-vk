@@ -1,5 +1,6 @@
 import UIKit
 import WebKit
+import SwiftKeychainWrapper
 
 class LoginViewController: UIViewController {
     
@@ -62,10 +63,15 @@ extension LoginViewController: WKNavigationDelegate {
                 return dict
         }
         
-        let token = params["access_token"]
+        guard let token = params["access_token"] else {
+            return
+        }
         
         let session = Session.sharedInstance
         session.token = token
+        
+        // Add access token to keychain
+        KeychainWrapper.standard.set(token, forKey: ACCESS_TOKEN)
         
         performSegue(withIdentifier: SignedInSegue, sender: self)
                 
