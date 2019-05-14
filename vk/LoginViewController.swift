@@ -47,6 +47,17 @@ class LoginViewController: UIViewController {
 extension LoginViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         
+        func successLogin() {
+            performSegue(withIdentifier: SignedInSegue, sender: self)
+            decisionHandler(.cancel)
+        }
+        
+        let session = Session.sharedInstance
+        if session.token != nil {
+            successLogin()
+            return
+        }
+        
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment  else {
             decisionHandler(.allow)
             return
@@ -67,14 +78,10 @@ extension LoginViewController: WKNavigationDelegate {
             return
         }
         
-        let session = Session.sharedInstance
         session.token = token
         
         // Add access token to keychain
         KeychainWrapper.standard.set(token, forKey: ACCESS_TOKEN)
-        
-        performSegue(withIdentifier: SignedInSegue, sender: self)
-                
-        decisionHandler(.cancel)
+        successLogin()
     }
 }

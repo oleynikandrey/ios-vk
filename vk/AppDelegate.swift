@@ -1,12 +1,5 @@
-//
-//  AppDelegate.swift
-//  vk
-//
-//  Created by Andrey Oleynik on 28/02/2019.
-//  Copyright © 2019 Andrey Oleynik. All rights reserved.
-//
-
 import UIKit
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +8,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let session = Session.sharedInstance
+        session.token = KeychainWrapper.standard.string(forKey: ACCESS_TOKEN)
+        
         return true
     }
 

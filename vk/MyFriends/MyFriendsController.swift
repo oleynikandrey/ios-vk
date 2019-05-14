@@ -1,5 +1,4 @@
 import UIKit
-import SwiftKeychainWrapper
 
 class MyFriendsController: UIViewController {
     
@@ -17,17 +16,25 @@ class MyFriendsController: UIViewController {
         friendsTableView.delegate = self
         searchBar.delegate = self
         
-        guard let accessToken = KeychainWrapper.standard.string(forKey: ACCESS_TOKEN) else {
+        guard let access_token = Session.sharedInstance.token else {
             return
         }
         
-        let client = VKAPIClient(access_token: accessToken)
+        let client = VKAPIClient(access_token: access_token)
         client.getFriends() {friends in
             self.initFriends = friends.sorted(by: {$0.first_name < $1.first_name})
             
             self.filterContentForSearchText(nil)
         }
-        
+
+        //Mark: - Save username to UserDefaults
+        client.getProfile() { user in
+            let userDefaults = UserDefaults.standard
+            userDefaults.set("\(user.first_name) \(user.last_name)", forKey: "name")
+            
+            print("Got username from UserDefauls:", userDefaults.string(forKey: "name") ?? "")
+        }
+
         //MARK: - Look and feel
         friendsTableView.backgroundColor = nil
 
