@@ -46,7 +46,6 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        
         func successLogin() {
             performSegue(withIdentifier: SignedInSegue, sender: self)
             decisionHandler(.cancel)
