@@ -1,5 +1,7 @@
 import Foundation
 
+let ACCESS_TOKEN = "accessToken"
+
 class Session {
     var token: String?
     var userId: Int?

@@ -26,7 +26,15 @@ class MyFriendsController: UIViewController {
             
             self.filterContentForSearchText(nil)
         }
-        
+
+        //Mark: - Save username to UserDefaults
+        client.getProfile() { user in
+            let userDefaults = UserDefaults.standard
+            userDefaults.set("\(user.first_name) \(user.last_name)", forKey: "name")
+            
+            print("Got username from UserDefauls:", userDefaults.string(forKey: "name") ?? "")
+        }
+
         //MARK: - Look and feel
         friendsTableView.backgroundColor = nil
 

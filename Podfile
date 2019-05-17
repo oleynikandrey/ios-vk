@@ -6,5 +6,6 @@ target 'vk' do
 
   # Pods for vk
   pod 'Alamofire'
-
+  pod 'SwiftKeychainWrapper'
+  
 end
