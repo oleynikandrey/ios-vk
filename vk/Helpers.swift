@@ -8,15 +8,16 @@ extension UIImageView {
     }
     
     private func getImageCacheFileName(from url: URL) -> String {
-        return "\(String(url.hashValue)).image"
+        return "\(url.hashValue).png"
     }
     
     private func getImage(by url: URL) -> UIImage? {
         let fileUrl = getCacheDirectory().appendingPathComponent(getImageCacheFileName(from: url))
-        do {
-            let imageData = try Data(contentsOf: fileUrl)
-            return UIImage(data: imageData)
-        } catch {
+        let imageData = try? Data(contentsOf: fileUrl)
+
+        if let data = imageData {
+            return UIImage(data: data)
+        } else {
             return nil
         }
     }
@@ -26,12 +27,7 @@ extension UIImageView {
         guard let data = image.pngData() else {
             return
         }
-        
-        do {
-            try data.write(to: fileUrl)
-        } catch {
-            return
-        }
+        try? data.write(to: fileUrl)
     }
     
     func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
