@@ -47,11 +47,14 @@ class LoginViewController: UIViewController {
 extension LoginViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         func successLogin(token: String) {
-            // Preload data to realm
+            // Clean DB. TBD: Add cleanup logic
+            VKDao.clean()
             
+            // Preload data to realm
             let client = VKAPIClient(access_token: token)
             
             client.getProfile() { user in
+                VKDao.saveUserData(user)
                 client.getFriends() { friends in
                     VKDao.saveFriendsData(user_id: user.id, friends: friends)
                     self.performSegue(withIdentifier: self.SignedInSegue, sender: self)

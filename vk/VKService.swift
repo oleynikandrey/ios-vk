@@ -230,4 +230,15 @@ class VKDao {
             return []
         }
     }
+    
+    class func clean() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
