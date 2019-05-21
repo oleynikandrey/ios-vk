@@ -4,7 +4,7 @@ class FriendInfoController: UIViewController {
 
     @IBOutlet weak var friendInfo: UICollectionView!
     
-    var friend: User?
+    var friend: Friend?
     var imageIndex = 0
     
     override func viewDidLoad() {

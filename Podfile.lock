@@ -1,20 +1,30 @@
 PODS:
   - Alamofire (4.8.2)
+  - Realm (3.15.0):
+    - Realm/Headers (= 3.15.0)
+  - Realm/Headers (3.15.0)
+  - RealmSwift (3.15.0):
+    - Realm (= 3.15.0)
   - SwiftKeychainWrapper (3.3.0)
 
 DEPENDENCIES:
   - Alamofire
+  - RealmSwift
   - SwiftKeychainWrapper
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Realm
+    - RealmSwift
     - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Realm: 9b834e1be6062f544805252c812348872dc5d4ed
+  RealmSwift: 8a41886f8ab6efef9eb8df97de2f2bb911561a79
   SwiftKeychainWrapper: ef5ad793bc0e08e24a5913f28345b8f7bc8e4123
 
-PODFILE CHECKSUM: 32bda9e18977d89275ca82c1d2f08e6edb3a78a7
+PODFILE CHECKSUM: b9855490bf2d02109686065782220494cad35af2
 
 COCOAPODS: 1.6.1
