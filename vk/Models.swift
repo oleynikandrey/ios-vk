@@ -2,20 +2,6 @@ import Foundation
 import RealmSwift
 import UIKit
 
-//class User: Codable {
-//    var id: Int
-//    var first_name: String
-//    var last_name: String
-//    var photo_uri: String
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case first_name
-//        case last_name
-//        case photo_uri = "photo_100"
-//    }
-//}
-
 class BaseUser: Object, Codable {
     @objc dynamic var id: Int = 0
     @objc dynamic var first_name: String = ""
@@ -58,26 +44,6 @@ class User: BaseUser {
 class Friend: BaseUser {
     let friends = LinkingObjects(fromType: User.self, property: "friends")
 }
-
-
-//class BaseRealmUser: Object {
-//    @objc dynamic var id: Int = 0
-//    @objc dynamic var first_name: String = ""
-//    @objc dynamic var last_name: String = ""
-//    @objc dynamic var photo_uri: String = ""
-//
-//    override static func primaryKey() -> String? {
-//        return "id"
-//    }
-//}
-//
-//class RealmUser: BaseRealmUser {
-//    let friends = List<RealmFriend>()
-//}
-//
-//class RealmFriend: BaseRealmUser {
-//    let friends = LinkingObjects(fromType: RealmUser.self, property: "friends")
-//}
 
 class VkResponse {
     enum CodingKeys: String, CodingKey {
