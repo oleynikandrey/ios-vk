@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 class MyFriendsController: UIViewController {
     
@@ -9,6 +10,9 @@ class MyFriendsController: UIViewController {
     private var initFriends = [Friend] ()
     private var friendsGrouped: [String: [Friend]] = [:]
     
+    private var realmFriends: Results<Friend>?
+    private var token: NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,8 +21,8 @@ class MyFriendsController: UIViewController {
         searchBar.delegate = self
         
         self.initFriends = VKDao.loadFriendsData()
-            
-        self.filterContentForSearchText(nil)
+        
+        pairTableAndRealm()
 
         //MARK: - Look and feel
         friendsTableView.backgroundColor = nil
@@ -60,12 +64,39 @@ class MyFriendsController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFriendInfo" {
             if let indexPath = friendsTableView.indexPathForSelectedRow {
-                let key = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
-                let friend = friendsGrouped[key]?[indexPath.row]
+//                let key = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
+//                let friend = friendsGrouped[key]?[indexPath.row]
+                let friend = realmFriends![indexPath.row]
                 let controller = segue.destination as! FriendInfoController
                 controller.friend = friend
             }
         }
+    }
+    
+    func pairTableAndRealm() {
+        guard let realm = try? Realm() else {
+            return
+        }
+        realmFriends = realm.objects(Friend.self)
+        token = realmFriends?.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.friendsTableView else {
+                return
+            }
+
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                tableView.beginUpdates()
+                tableView.insertRows(at: insertions.map({IndexPath(row: $0, section: 0)}), with: .automatic)
+                tableView.deleteRows(at: deletions.map({IndexPath(row: $0, section: 0)}), with: .automatic)
+                tableView.reloadRows(at: modifications.map({IndexPath(row: $0, section: 0)}), with: .automatic)
+                tableView.endUpdates()
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
+        
     }
 }
 
@@ -75,26 +106,34 @@ extension MyFriendsController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return friendsGrouped.count
+//        return friendsGrouped.count
+        return 1
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: section)
-        return sectionTitle
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: section)
+//        return sectionTitle
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: section)
-        return friendsGrouped[sectionTitle]?.count ?? 0
+//        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: section)
+//        return friendsGrouped[sectionTitle]?.count ?? 0
+        if let _friends = realmFriends {
+            return _friends.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
         
-        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
-        let sectionFriends = friendsGrouped[sectionTitle]
+//        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
+//        let sectionFriends = friendsGrouped[sectionTitle]
         
-        let friend = sectionFriends![indexPath.row]
+//        let friend = sectionFriends![indexPath.row]
+        let friend = realmFriends![indexPath.row]
+        
         cell.name.text = "\(friend.first_name) \(friend.last_name)"
         let avatar = cell.avatar as? AvatarImageView
         avatar?.downloaded(from: friend.photo_uri)
