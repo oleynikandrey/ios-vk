@@ -38,9 +38,11 @@ class MyFriendsController: UIViewController {
     func filterContentForSearchText(_ searchText: String?, scope: String = "All") {
         
         if searchText?.isEmpty ?? true {
-            friends = initFriends
+            friends = Array(realmFriends!)
         } else {
-            friends = initFriends.filter {("\($0.first_name) \($0.last_name)").lowercased().contains(searchText!.lowercased())}
+            let query = searchText!.lowercased()
+            let predicate = NSPredicate(format: "first_name CONTAINS [cd]%@ OR last_name CONTAINS [cd]%@", query, query)
+            friends = Array(realmFriends!.filter(predicate))
         }
         
         friendsGrouped = [:]
@@ -64,9 +66,8 @@ class MyFriendsController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFriendInfo" {
             if let indexPath = friendsTableView.indexPathForSelectedRow {
-//                let key = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
-//                let friend = friendsGrouped[key]?[indexPath.row]
-                let friend = realmFriends![indexPath.row]
+                let key = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
+                let friend = friendsGrouped[key]?[indexPath.row]
                 let controller = segue.destination as! FriendInfoController
                 controller.friend = friend
             }
@@ -86,12 +87,8 @@ class MyFriendsController: UIViewController {
             switch changes {
             case .initial:
                 tableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
-                tableView.beginUpdates()
-                tableView.insertRows(at: insertions.map({IndexPath(row: $0, section: 0)}), with: .automatic)
-                tableView.deleteRows(at: deletions.map({IndexPath(row: $0, section: 0)}), with: .automatic)
-                tableView.reloadRows(at: modifications.map({IndexPath(row: $0, section: 0)}), with: .automatic)
-                tableView.endUpdates()
+            case .update(_, _, _, _):
+                self!.filterContentForSearchText(self!.searchBar.text)
             case .error(let error):
                 fatalError("\(error)")
             }
@@ -106,33 +103,26 @@ extension MyFriendsController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-//        return friendsGrouped.count
-        return 1
+        return friendsGrouped.count
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: section)
-//        return sectionTitle
-//    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: section)
+        return sectionTitle
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: section)
-//        return friendsGrouped[sectionTitle]?.count ?? 0
-        if let _friends = realmFriends {
-            return _friends.count
-        } else {
-            return 0
-        }
+        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: section)
+        return friendsGrouped[sectionTitle]?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
         
-//        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
-//        let sectionFriends = friendsGrouped[sectionTitle]
+        let sectionTitle = getDictKeyByIndex(dict: friendsGrouped, index: indexPath.section)
+        let sectionFriends = friendsGrouped[sectionTitle]
         
-//        let friend = sectionFriends![indexPath.row]
-        let friend = realmFriends![indexPath.row]
+        let friend = sectionFriends![indexPath.row]
         
         cell.name.text = "\(friend.first_name) \(friend.last_name)"
         let avatar = cell.avatar as? AvatarImageView
