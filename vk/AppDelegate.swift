@@ -1,5 +1,6 @@
 import UIKit
 import SwiftKeychainWrapper
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -10,6 +11,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let session = Session.sharedInstance
         session.token = KeychainWrapper.standard.string(forKey: ACCESS_TOKEN)
+        
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
         
         return true
     }

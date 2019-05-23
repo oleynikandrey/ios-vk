@@ -1,4 +1,5 @@
 import Foundation
+import RealmSwift
 
 let ACCESS_TOKEN = "accessToken"
 
@@ -66,7 +67,7 @@ class VKAPIClient{
         task.resume()
     }
     
-    func getFriends(completionHandler: @escaping ([User]) -> Void ) {
+    func getFriends(completionHandler: @escaping ([Friend]) -> Void ) {
         var components = urlComponents
         components.path += "friends.get"
         components.queryItems?.append(URLQueryItem(name: "fields", value: "nickname,photo_100"))
@@ -83,7 +84,7 @@ class VKAPIClient{
             }
             
             do {
-                let friends = try JSONDecoder().decode(UsersResponse.self, from: data).list
+                let friends = try JSONDecoder().decode(FriendsResponse.self, from: data).list
                 DispatchQueue.main.async() {
                     completionHandler(friends)
                 }
@@ -181,5 +182,63 @@ class VKAPIClient{
         }
         task.resume()
         
+    }
+}
+
+class VKDao {
+    
+    class func saveUserData(_ user: User) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(user, update: true)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    class func saveFriendsData(user_id: Int, friends: [Friend]) {
+        do {
+            let realm = try Realm()
+            guard let user = realm.object(ofType: User.self, forPrimaryKey: user_id) else {
+                return
+            }
+            try realm.write {
+                for friend in friends {
+                    if let realmFriend = realm.object(ofType: Friend.self, forPrimaryKey: friend.id) {
+                        user.friends.append(realmFriend)
+                    } else {
+                        user.friends.append(friend)
+                    }
+                }
+                realm.add(user, update: true)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    class func loadFriendsData() -> [Friend] {
+        do {
+            let realm = try Realm()
+            let friends = realm.objects(Friend.self).sorted(byKeyPath: "first_name")
+            return Array(friends)
+            
+        } catch {
+            print(error)
+            return []
+        }
+    }
+    
+    class func clean() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {
+            print(error)
+        }
     }
 }

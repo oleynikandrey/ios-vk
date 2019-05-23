@@ -5,9 +5,9 @@ class MyFriendsController: UIViewController {
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var friends = [User] ()
-    private var initFriends = [User] ()
-    private var friendsGrouped: [String: [User]] = [:]
+    var friends = [Friend] ()
+    private var initFriends = [Friend] ()
+    private var friendsGrouped: [String: [Friend]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,24 +16,9 @@ class MyFriendsController: UIViewController {
         friendsTableView.delegate = self
         searchBar.delegate = self
         
-        guard let access_token = Session.sharedInstance.token else {
-            return
-        }
-        
-        let client = VKAPIClient(access_token: access_token)
-        client.getFriends() {friends in
-            self.initFriends = friends.sorted(by: {$0.first_name < $1.first_name})
+        self.initFriends = VKDao.loadFriendsData()
             
-            self.filterContentForSearchText(nil)
-        }
-
-        //Mark: - Save username to UserDefaults
-        client.getProfile() { user in
-            let userDefaults = UserDefaults.standard
-            userDefaults.set("\(user.first_name) \(user.last_name)", forKey: "name")
-            
-            print("Got username from UserDefauls:", userDefaults.string(forKey: "name") ?? "")
-        }
+        self.filterContentForSearchText(nil)
 
         //MARK: - Look and feel
         friendsTableView.backgroundColor = nil

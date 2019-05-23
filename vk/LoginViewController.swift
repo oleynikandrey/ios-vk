@@ -46,14 +46,26 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        func successLogin() {
-            performSegue(withIdentifier: SignedInSegue, sender: self)
-            decisionHandler(.cancel)
+        func successLogin(token: String) {
+            // Clean DB. TBD: Add cleanup logic
+            VKDao.clean()
+            
+            // Preload data to realm
+            let client = VKAPIClient(access_token: token)
+            
+            client.getProfile() { user in
+                VKDao.saveUserData(user)
+                client.getFriends() { friends in
+                    VKDao.saveFriendsData(user_id: user.id, friends: friends)
+                    self.performSegue(withIdentifier: self.SignedInSegue, sender: self)
+                    decisionHandler(.cancel)
+                }
+            }
         }
         
         let session = Session.sharedInstance
-        if session.token != nil {
-            successLogin()
+        if let token = session.token {
+            successLogin(token: token)
             return
         }
         
@@ -81,6 +93,6 @@ extension LoginViewController: WKNavigationDelegate {
         
         // Add access token to keychain
         KeychainWrapper.standard.set(token, forKey: ACCESS_TOKEN)
-        successLogin()
+        successLogin(token: token)
     }
 }
