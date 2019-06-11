@@ -234,6 +234,7 @@ class VKDao {
     class func clean() {
         do {
             let realm = try Realm()
+            print(realm.configuration.fileURL)
             try realm.write {
                 realm.deleteAll()
             }

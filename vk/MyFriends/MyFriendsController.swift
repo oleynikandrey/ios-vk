@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 class MyFriendsController: UIViewController {
     
@@ -9,6 +10,9 @@ class MyFriendsController: UIViewController {
     private var initFriends = [Friend] ()
     private var friendsGrouped: [String: [Friend]] = [:]
     
+    private var realmFriends: Results<Friend>?
+    private var token: NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,8 +21,8 @@ class MyFriendsController: UIViewController {
         searchBar.delegate = self
         
         self.initFriends = VKDao.loadFriendsData()
-            
-        self.filterContentForSearchText(nil)
+        
+        pairTableAndRealm()
 
         //MARK: - Look and feel
         friendsTableView.backgroundColor = nil
@@ -34,9 +38,11 @@ class MyFriendsController: UIViewController {
     func filterContentForSearchText(_ searchText: String?, scope: String = "All") {
         
         if searchText?.isEmpty ?? true {
-            friends = initFriends
+            friends = Array(realmFriends!)
         } else {
-            friends = initFriends.filter {("\($0.first_name) \($0.last_name)").lowercased().contains(searchText!.lowercased())}
+            let query = searchText!.lowercased()
+            let predicate = NSPredicate(format: "first_name CONTAINS [cd]%@ OR last_name CONTAINS [cd]%@", query, query)
+            friends = Array(realmFriends!.filter(predicate))
         }
         
         friendsGrouped = [:]
@@ -67,6 +73,28 @@ class MyFriendsController: UIViewController {
             }
         }
     }
+    
+    func pairTableAndRealm() {
+        guard let realm = try? Realm() else {
+            return
+        }
+        realmFriends = realm.objects(Friend.self)
+        token = realmFriends?.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.friendsTableView else {
+                return
+            }
+
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, _, _, _):
+                self!.filterContentForSearchText(self!.searchBar.text)
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
+        
+    }
 }
 
 extension MyFriendsController: UITableViewDataSource {
@@ -95,6 +123,7 @@ extension MyFriendsController: UITableViewDataSource {
         let sectionFriends = friendsGrouped[sectionTitle]
         
         let friend = sectionFriends![indexPath.row]
+        
         cell.name.text = "\(friend.first_name) \(friend.last_name)"
         let avatar = cell.avatar as? AvatarImageView
         avatar?.downloaded(from: friend.photo_uri)
