@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,23 +20,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="news" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4f-2J-chL">
-                        <rect key="frame" x="8" y="0.0" width="304" height="27.5"/>
+                        <rect key="frame" x="8" y="0.0" width="304" height="1.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="RJe-qe-ahm" userLabel="Image">
-                        <rect key="frame" x="16" y="35.5" width="288" height="288"/>
+                        <rect key="frame" x="16" y="9.5" width="288" height="288"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="RJe-qe-ahm" secondAttribute="height" multiplier="1:1" id="v67-zj-8nE"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCj-J3-zhE" customClass="LikeControl" customModule="vk" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="331.5" width="88" height="44"/>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CCj-J3-zhE" customClass="LikeControl" customModule="vk" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="305.5" width="88" height="70"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOO-CW-Vd7" userLabel="Share Button">
-                        <rect key="frame" x="152" y="331.5" width="44" height="44"/>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOO-CW-Vd7" userLabel="Share Button">
+                        <rect key="frame" x="152" y="305.5" width="44" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="LOO-CW-Vd7" secondAttribute="height" multiplier="1:1" id="mYo-ld-tsT"/>
                         </constraints>
@@ -44,13 +44,13 @@
                         <state key="normal" title="Button" image="share_button"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiB-Gl-bIj">
-                        <rect key="frame" x="281.5" y="331.5" width="28.5" height="44"/>
+                        <rect key="frame" x="281.5" y="305.5" width="28.5" height="70"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gea-yH-HB3" userLabel="Comment Button">
-                        <rect key="frame" x="98" y="331.5" width="44" height="44"/>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gea-yH-HB3" userLabel="Comment Button">
+                        <rect key="frame" x="98" y="305.5" width="44" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Gea-yH-HB3" secondAttribute="height" multiplier="1:1" id="88v-iF-w10"/>
                         </constraints>
@@ -87,14 +87,15 @@
             <connections>
                 <outlet property="newsImage" destination="RJe-qe-ahm" id="eWQ-TL-O1Y"/>
                 <outlet property="newsLabel" destination="f4f-2J-chL" id="BRm-7C-GVA"/>
+                <outlet property="newsLikeControl" destination="CCj-J3-zhE" id="bGJ-Wk-LPr"/>
                 <outlet property="newsViews" destination="HiB-Gl-bIj" id="QKX-Ig-2Ve"/>
             </connections>
             <point key="canvasLocation" x="0.0" y="102.54872563718142"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="1" width="400" height="400"/>
-        <image name="comments_button" width="96" height="96"/>
-        <image name="share_button" width="96" height="96"/>
+        <image name="1" width="200" height="200"/>
+        <image name="comments_button" width="60" height="60"/>
+        <image name="share_button" width="64" height="64"/>
     </resources>
 </document>
