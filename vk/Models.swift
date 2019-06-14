@@ -228,11 +228,6 @@ class NewsPost: Object, Decodable {
         case photo
     }
     
-//    enum LinkAttachment: String, CodingKey {
-//        case type
-//        case link
-//    }
-    
     required convenience init(from decoder: Decoder) throws {
         self.init()
         
