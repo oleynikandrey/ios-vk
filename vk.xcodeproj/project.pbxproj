@@ -24,7 +24,6 @@
 		26694CE8223E7F7000EDD7D9 /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26694CE7223E7F7000EDD7D9 /* NewsController.swift */; };
 		26694CEB223E809800EDD7D9 /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26694CE9223E809800EDD7D9 /* NewsViewCell.swift */; };
 		26694CEC223E809800EDD7D9 /* NewsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26694CEA223E809800EDD7D9 /* NewsViewCell.xib */; };
-		26694CEE223EEE5E00EDD7D9 /* newsTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26694CED223EEE5E00EDD7D9 /* newsTexts.swift */; };
 		26694CF022437ED700EDD7D9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26694CEF22437ED700EDD7D9 /* ActivityIndicator.swift */; };
 		26762DFD2235A7CA0026FFC7 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26762DFB2235A7CA0026FFC7 /* AvatarImageView.swift */; };
 		26762DFE2235A7CA0026FFC7 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26762DFC2235A7CA0026FFC7 /* LikeControl.swift */; };
@@ -58,7 +57,6 @@
 		26694CE7223E7F7000EDD7D9 /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
 		26694CE9223E809800EDD7D9 /* NewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
 		26694CEA223E809800EDD7D9 /* NewsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsViewCell.xib; sourceTree = "<group>"; };
-		26694CED223EEE5E00EDD7D9 /* newsTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newsTexts.swift; sourceTree = "<group>"; };
 		26694CEF22437ED700EDD7D9 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		26762DFB2235A7CA0026FFC7 /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		26762DFC2235A7CA0026FFC7 /* LikeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 				26694CE7223E7F7000EDD7D9 /* NewsController.swift */,
 				26694CE9223E809800EDD7D9 /* NewsViewCell.swift */,
 				26694CEA223E809800EDD7D9 /* NewsViewCell.xib */,
-				26694CED223EEE5E00EDD7D9 /* newsTexts.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -287,22 +284,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vk/Pods-vk-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-vk/Pods-vk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-vk/Pods-vk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -353,7 +339,6 @@
 				2667B54B223308090024D8F3 /* MyGroupsCell.swift in Sources */,
 				2667B53A2232E4840024D8F3 /* Models.swift in Sources */,
 				2667B5442232FE8E0024D8F3 /* MyGroupsController.swift in Sources */,
-				26694CEE223EEE5E00EDD7D9 /* newsTexts.swift in Sources */,
 				2667B547223300B60024D8F3 /* AllGroupsController.swift in Sources */,
 				26762DFE2235A7CA0026FFC7 /* LikeControl.swift in Sources */,
 				26762DFD2235A7CA0026FFC7 /* AvatarImageView.swift in Sources */,

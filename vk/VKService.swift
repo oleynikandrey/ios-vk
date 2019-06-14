@@ -38,150 +38,190 @@ class VKAPIClient{
     }
     
     func getProfile(completionHandler: @escaping (User) -> Void ) {
-        var components = urlComponents
-        components.path += "users.get"
-        components.queryItems?.append(URLQueryItem(name: "fields", value: "photo_100"))
-        
-        let task = session.dataTask(with: components.url!) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
+        DispatchQueue.global().async {
+            var components = self.urlComponents
+            components.path += "users.get"
+            components.queryItems?.append(URLQueryItem(name: "fields", value: "photo_100"))
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
-                let data = data else {
+            let task = self.session.dataTask(with: components.url!) { data, response, error in
+                if let error = error {
+                    print(error)
                     return
-            }
-            
-            do {
-                if let user = try JSONDecoder().decode(UserResponse.self, from: data).user {
-                    DispatchQueue.main.async() {
-                        completionHandler(user)
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+                    let data = data else {
+                        return
+                }
+                
+                do {
+                    if let user = try JSONDecoder().decode(UserResponse.self, from: data).user {
+                        DispatchQueue.main.async() {
+                            completionHandler(user)
+                        }
                     }
+                    
+                } catch {
+                    print(error)
                 }
-                
-            } catch {
-                print(error)
             }
+            task.resume()
         }
-        task.resume()
     }
-    
-    func getFriends(completionHandler: @escaping ([Friend]) -> Void ) {
-        var components = urlComponents
-        components.path += "friends.get"
-        components.queryItems?.append(URLQueryItem(name: "fields", value: "nickname,photo_100"))
         
-        let task = session.dataTask(with: components.url!) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
+    func getFriends(completionHandler: @escaping ([Friend]) -> Void ) {
+        DispatchQueue.global().async {
+            var components = self.urlComponents
+            components.path += "friends.get"
+            components.queryItems?.append(URLQueryItem(name: "fields", value: "nickname,photo_100"))
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
-                let data = data else {
+            let task = self.session.dataTask(with: components.url!) { data, response, error in
+                if let error = error {
+                    print(error)
                     return
-            }
-            
-            do {
-                let friends = try JSONDecoder().decode(FriendsResponse.self, from: data).list
-                DispatchQueue.main.async() {
-                    completionHandler(friends)
                 }
                 
-            } catch {
-                print(error)
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+                    let data = data else {
+                        return
+                }
+                
+                do {
+                    let friends = try JSONDecoder().decode(FriendsResponse.self, from: data).list
+                    DispatchQueue.main.async() {
+                        completionHandler(friends)
+                    }
+                    
+                } catch {
+                    print(error)
+                }
             }
+            task.resume()
         }
-        task.resume()
     }
     
     func getPhotos(album_id: String = "profile", completionHandler: @escaping ([Photo]) -> Void ) {
-        var components = urlComponents
-        components.path += "photos.get"
-        components.queryItems?.append(URLQueryItem(name: "album_id", value: album_id))
-        
-        let task = session.dataTask(with: components.url!) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
+        DispatchQueue.global().async {
+            var components = self.urlComponents
+            components.path += "photos.get"
+            components.queryItems?.append(URLQueryItem(name: "album_id", value: album_id))
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
-                let data = data else {
+            let task = self.session.dataTask(with: components.url!) { data, response, error in
+                if let error = error {
+                    print(error)
                     return
-            }
-            
-            do {
-                let photos = try JSONDecoder().decode(PhotosResponse.self, from: data).list
-                DispatchQueue.main.async() {
-                    completionHandler(photos)
                 }
                 
-            } catch {
-                print(error)
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+                    let data = data else {
+                        return
+                }
+                
+                do {
+                    let photos = try JSONDecoder().decode(PhotosResponse.self, from: data).list
+                    DispatchQueue.main.async() {
+                        completionHandler(photos)
+                    }
+                    
+                } catch {
+                    print(error)
+                }
             }
+            task.resume()
         }
-        task.resume()
     }
     
     func getGroups(completionHandler: @escaping ([Group]) -> Void ) {
-        var components = urlComponents
-        components.path += "groups.get"
-        components.queryItems?.append(URLQueryItem(name: "extended", value: "1"))
-        
-        let task = session.dataTask(with: components.url!) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
+        DispatchQueue.global().async {
+            var components = self.urlComponents
+            components.path += "groups.get"
+            components.queryItems?.append(URLQueryItem(name: "extended", value: "1"))
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
-                let data = data else {
+            let task = self.session.dataTask(with: components.url!) { data, response, error in
+                if let error = error {
+                    print(error)
                     return
-            }
-            
-            do {
-                let groups = try JSONDecoder().decode(GroupsResponse.self.self, from: data).list
-                DispatchQueue.main.async() {
-                    completionHandler(groups)
                 }
                 
-            } catch {
-                print(error)
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+                    let data = data else {
+                        return
+                }
+                
+                do {
+                    let groups = try JSONDecoder().decode(GroupsResponse.self.self, from: data).list
+                    DispatchQueue.main.async() {
+                        completionHandler(groups)
+                    }
+                    
+                } catch {
+                    print(error)
+                }
             }
+            task.resume()
         }
-        task.resume()
     }
     
     func findGroups(query: String, completionHandler: @escaping ([Group]) -> Void ) {
-        var components = urlComponents
-        components.path += "groups.search"
-        components.queryItems?.append(URLQueryItem(name: "q", value: query))
-        
-        let task = session.dataTask(with: components.url!) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
+        DispatchQueue.global().async {
+            var components = self.urlComponents
+            components.path += "groups.search"
+            components.queryItems?.append(URLQueryItem(name: "q", value: query))
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
-                let data = data else {
+            let task = self.session.dataTask(with: components.url!) { data, response, error in
+                if let error = error {
+                    print(error)
                     return
-            }
-            
-            do {
-                let groups = try JSONDecoder().decode(GroupsResponse.self.self, from: data).list
-                DispatchQueue.main.async() {
-                    completionHandler(groups)
                 }
                 
-            } catch {
-                print(error)
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+                    let data = data else {
+                        return
+                }
+                
+                do {
+                    let groups = try JSONDecoder().decode(GroupsResponse.self.self, from: data).list
+                    DispatchQueue.main.async() {
+                        completionHandler(groups)
+                    }
+                    
+                } catch {
+                    print(error)
+                }
             }
+            task.resume()
         }
-        task.resume()
-        
+    }
+    
+    func getNewsPosts(completionHandler: @escaping ([NewsPost]) -> Void ) {
+        DispatchQueue.global().async {
+            var components = self.urlComponents
+            components.path += "newsfeed.get"
+            components.queryItems?.append(URLQueryItem(name: "filters", value: "post"))
+            
+            let task = self.session.dataTask(with: components.url!) { data, response, error in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+                    let data = data else {
+                        return
+                }
+
+                do {
+                    let posts = try JSONDecoder().decode(NewsPostResponse.self, from: data).list
+                    DispatchQueue.main.async() {
+                        completionHandler(posts)
+                    }
+
+                } catch {
+                    print(error)
+                }
+            }
+            task.resume()
+        }
     }
 }
 
@@ -234,7 +274,7 @@ class VKDao {
     class func clean() {
         do {
             let realm = try Realm()
-            print(realm.configuration.fileURL)
+            print(realm.configuration.fileURL ?? "no file")
             try realm.write {
                 realm.deleteAll()
             }

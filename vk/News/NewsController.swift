@@ -1,9 +1,10 @@
 import UIKit
+import SwiftKeychainWrapper
 
 class NewsController: UIViewController {
     @IBOutlet weak var newsTableView: UITableView!
     
-    var news = [News] ()
+    var news = [NewsPost] ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,11 +14,16 @@ class NewsController: UIViewController {
         newsTableView.rowHeight = UITableView.automaticDimension
         newsTableView.estimatedRowHeight = 600
         
-        news = [
-            News(text: news1, image: #imageLiteral(resourceName: "news1"), views: 10),
-            News(text: news2, image: #imageLiteral(resourceName: "news2"), views: 100),
-            News(text: news3, image: #imageLiteral(resourceName: "news3"), views: 1000),
-        ]
+        let token = KeychainWrapper.standard.string(forKey: ACCESS_TOKEN)
+        DispatchQueue.global().async {
+            let client = VKAPIClient(access_token: token!)
+            client.getNewsPosts() {posts in
+                DispatchQueue.main.async {
+                    self.news = posts
+                    self.newsTableView.reloadData()
+                }
+            }
+        }
     }
 }
 
@@ -31,17 +37,21 @@ extension NewsController: UITableViewDataSource {
         let item = news[indexPath.row]
         cell.newsLabel?.text = item.text
         
-        if let image = item.image {
-            if image.size.height == image.size.width {
-                cell.newsImage?.image = image
-            } else {
-                let minLength = min(image.size.height, image.size.width)
-                let boundingBox = CGRect(x: minLength/2, y: minLength/2, width: minLength, height: minLength)
-                cell.newsImage?.image = image.cropped(boundingBox: boundingBox)
-            }
-        }
+//        if let image = item.image {
+//            if image.size.height == image.size.width {
+//                cell.newsImage?.image = image
+//            } else {
+//                let minLength = min(image.size.height, image.size.width)
+//                let boundingBox = CGRect(x: minLength/2, y: minLength/2, width: minLength, height: minLength)
+//                cell.newsImage?.image = image.cropped(boundingBox: boundingBox)
+//            }
+//        }
         
-        cell.newsViews?.text = String.init(item.views)
+        if let photo_uri = item.photo?.uri {
+                cell.newsImage.downloaded(from: photo_uri)
+        }
+        cell.newsLikeControl.likes = item.likes["count"] as! Int
+        cell.newsViews?.text = String.init(item.views["count"] as! Int)
         return cell
     }
 }
