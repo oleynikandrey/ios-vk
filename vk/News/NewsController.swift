@@ -1,6 +1,8 @@
 import UIKit
 import SwiftKeychainWrapper
 
+let opq = OperationQueue()
+
 class NewsController: UIViewController {
     @IBOutlet weak var newsTableView: UITableView!
     
@@ -34,8 +36,14 @@ extension NewsController: UITableViewDataSource {
         cell.newsLabel?.text = item.text
         
         if let photo_uri = item.photo?.uri {
-                cell.newsImage.downloaded(from: photo_uri)
+            let getImageOperation = GetImageOperation(image_uri: photo_uri)
+            opq.addOperation(getImageOperation)
+            
+            let setImageOperation = SetImageOperation(imageView: cell.newsImage)
+            setImageOperation.addDependency(getImageOperation)
+            OperationQueue.main.addOperation(setImageOperation)
         }
+        
         cell.newsLikeControl.likes = item.likes["count"] as! Int
         cell.newsViews?.text = String.init(item.views["count"] as! Int)
         return cell
