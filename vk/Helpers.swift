@@ -130,7 +130,7 @@ class GetImageOperation: AsyncOperation {
                 let data = data, error == nil,
                 let image = UIImage(data: data) else { return }
             
-            self.image = blur(image: image)
+            self.image = image
             self.state = .finished
             
             }.resume()
